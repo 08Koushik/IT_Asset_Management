@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Asset | Asset Management System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <h2>Asset Management System</h2>
+  </header>
+
+  <main class="add-asset">
+    <h3>Add New Asset</h3>
+    <form id="assetForm">
+      <label>Asset Name:</label>
+      <input type="text" id="assetName" placeholder="Enter asset name" required />
+
+      <label>Category:</label>
+      <input type="text" id="assetCategory" placeholder="Enter category (e.g. Laptop, Furniture)" required />
+
+      <label>Purchase Date:</label>
+      <input type="date" id="purchaseDate" required />
+
+      <label>Status:</label>
+      <select id="assetStatus" required>
+        <option value="Available">Available</option>
+        <option value="Assigned">Assigned</option>
+        <option value="Damaged">Damaged</option>
+      </select>
+
+      <button type="submit">Add Asset</button>
+    </form>
+
+    <div class="back-btn">
+      <a href="dashboard.html" class="btn">⬅ Back to Dashboard</a>
+    </div>
+  </main>
+
+  <script src="add-asset.js"></script>
+</body>
+</html>

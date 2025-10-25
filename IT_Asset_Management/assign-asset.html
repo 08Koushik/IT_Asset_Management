@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assign Asset | Asset Management System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <h2>Asset Management System</h2>
+  </header>
+
+  <main class="assign-asset">
+    <h3>Assign Asset to Employee</h3>
+    <form id="assignForm">
+      <label>Select Asset:</label>
+      <select id="assetSelect" required>
+        <option value="">-- Select Asset --</option>
+      </select>
+
+      <label>Employee Name:</label>
+      <input type="text" id="employeeName" placeholder="Enter employee name" required />
+
+      <button type="submit">Assign Asset</button>
+    </form>
+
+    <div class="back-btn">
+      <a href="dashboard.html" class="btn">⬅ Back to Dashboard</a>
+    </div>
+  </main>
+
+  <script src="assign-asset.js"></script>
+</body>
+</html>

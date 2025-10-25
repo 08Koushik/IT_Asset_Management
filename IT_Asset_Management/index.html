@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Asset Management - Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-container">
+    <h2>IT Asset Management System</h2>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Enter Username" required>
+      <input type="password" id="password" placeholder="Enter Password" required>
+      
+      <label for="role">Login as:</label>
+      <select id="role" required>
+        <option value="">-- Select Role --</option>
+        <option value="admin">Admin</option>
+        <option value="user">User</option>
+      </select>
+
+      <button type="submit">Login</button>
+    </form>
+    <p id="error-msg"></p>
+  </div>
+
+  <script src="login.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
