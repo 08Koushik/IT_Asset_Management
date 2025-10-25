@@ -24,14 +24,13 @@ document.addEventListener("DOMContentLoaded", function () {
         assignedTo: ""
       };
 
-      // Retrieve old assets from localStorage
+
       let assets = JSON.parse(localStorage.getItem("assets")) || [];
       assets.push(newAsset);
 
-      // Save back to localStorage
       localStorage.setItem("assets", JSON.stringify(assets));
 
-      alert("✅ Asset added successfully!");
+      alert(" Asset added successfully!");
       assetForm.reset();
     });
   }

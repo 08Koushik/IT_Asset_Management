@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function addActionListeners() {
-    // Delete button
+    
     const deleteButtons = document.querySelectorAll(".action-btn.delete");
     deleteButtons.forEach((btn) => {
       btn.addEventListener("click", function () {
@@ -42,11 +42,11 @@ document.addEventListener("DOMContentLoaded", function () {
         assets = assets.filter((asset) => asset.id !== id);
         localStorage.setItem("assets", JSON.stringify(assets));
         loadAssets();
-        alert("✅ Asset deleted successfully!");
+        alert(" Asset deleted successfully!");
       });
     });
 
-    // Edit button
+   
     const editButtons = document.querySelectorAll(".action-btn.edit");
     editButtons.forEach((btn) => {
       btn.addEventListener("click", function () {
@@ -65,12 +65,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
           localStorage.setItem("assets", JSON.stringify(assets));
           loadAssets();
-          alert("✅ Asset updated successfully!");
+          alert(" Asset updated successfully!");
         }
       });
     });
 
-    // ✅ Return button (New feature)
+    
     const returnButtons = document.querySelectorAll(".action-btn.return");
     returnButtons.forEach((btn) => {
       btn.addEventListener("click", function () {
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
             asset.assignedTo = "";
             localStorage.setItem("assets", JSON.stringify(assets));
             loadAssets();
-            alert("🔄 Asset returned successfully!");
+            alert(" Asset returned successfully!");
           }
         }
       });

@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const assetSelect = document.getElementById("assetSelect");
   const assignForm = document.getElementById("assignForm");
 
-  // Load available assets into dropdown
+  
   function loadAssets() {
     const assets = JSON.parse(localStorage.getItem("assets")) || [];
     assetSelect.innerHTML = '<option value="">-- Select Asset --</option>';
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Assign asset to employee
+  
   if (assignForm) {
     assignForm.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -38,9 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
         asset.status = "Assigned";
 
         localStorage.setItem("assets", JSON.stringify(assets));
-        alert(`✅ ${asset.name} assigned to ${employeeName}`);
+        alert(` ${asset.name} assigned to ${employeeName}`);
         assignForm.reset();
-        loadAssets(); // Refresh dropdown to remove assigned asset
+        loadAssets(); 
       }
     });
   }

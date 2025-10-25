@@ -15,7 +15,7 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
       localStorage.setItem("currentUser", "Admin");
       window.location.href = "dashboard.html";
     } else {
-      errorMsg.textContent = "❌ Invalid Admin credentials!";
+      errorMsg.textContent = " Invalid Admin credentials!";
     }
   } 
   else if(role === "user") {
@@ -23,10 +23,10 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
       localStorage.setItem("currentUser", "User");
       window.location.href = "user-dashboard.html";
     } else {
-      errorMsg.textContent = "❌ Invalid User credentials!";
+      errorMsg.textContent = " Invalid User credentials!";
     }
   } 
   else {
-    errorMsg.textContent = "⚠️ Please select a role!";
+    errorMsg.textContent = " Please select a role!";
   }
 });

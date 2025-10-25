@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             asset.assignedTo = currentUser;
             localStorage.setItem("assets", JSON.stringify(assets));
             loadAvailableAssets();
-            alert("✅ Request successful! Asset assigned to you.");
+            alert(" Request successful! Asset assigned to you.");
           }
         }
       });
