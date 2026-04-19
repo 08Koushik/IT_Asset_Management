@@ -18,28 +18,46 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Crucial to prevent 403 on POST requests during development
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // Public access
-                        .requestMatchers("/", "/index.html", "/register.html", "/*.js", "/*.css", "/api/public/**").permitAll()
+                        // Static resources and public pages — always open
+                        .requestMatchers(
+                                "/", "/index.html", "/register.html",
+                                "/**/*.js", "/**/*.css", "/**/*.png", "/**/*.ico",
+                                "/api/public/**"
+                        ).permitAll()
 
-                        // Admin routes - using hasRole("ADMIN") looks for "ROLE_ADMIN" in the DB
-                        .requestMatchers("/dashboard.html", "/view-assets.html", "/add-asset.html", "/assign-asset.html", "/manage-requests.html").hasRole("ADMIN")
+                        // Admin pages — must have ROLE_ADMIN in DB
+                        .requestMatchers(
+                                "/dashboard.html", "/view-assets.html", "/add-asset.html",
+                                "/assign-asset.html", "/manage-requests.html"
+                        ).hasAuthority("ROLE_ADMIN")
 
-                        // User routes - using hasRole("USER") looks for "ROLE_USER" in the DB
-                        .requestMatchers("/user-dashboard.html", "/browse-assets.html", "/my-assets.html", "/view-available-assets.html").hasRole("USER")
+                        // User pages — must have ROLE_USER in DB
+                        .requestMatchers(
+                                "/user-dashboard.html", "/browse-assets.html",
+                                "/my-assets.html", "/view-available-assets.html"
+                        ).hasAuthority("ROLE_USER")
 
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/index.html")
-                        .loginProcessingUrl("/perform_login") // Matches the action in your index.html
-                        .defaultSuccessUrl("/dashboard.html", true)
+                        .loginProcessingUrl("/perform_login")
+                        // Role-based redirect: ROLE_ADMIN → dashboard, ROLE_USER → user-dashboard
+                        .successHandler((request, response, authentication) -> {
+                            boolean isAdmin = authentication.getAuthorities().stream()
+                                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+                            response.sendRedirect(isAdmin ? "/dashboard.html" : "/user-dashboard.html");
+                        })
+                        .failureUrl("/index.html?error=true")
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/index.html")
+                        .logoutSuccessUrl("/index.html?logout=true")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
                         .permitAll()
                 );
 
