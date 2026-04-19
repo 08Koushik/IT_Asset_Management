@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Asset</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="add-asset">
+    <h3>Add New Asset</h3>
+    <form id="assetForm">
+        <input type="text" id="assetName" placeholder="Asset Name" required />
+        <input type="text" id="assetCategory" placeholder="Category" required />
+        <input type="date" id="purchaseDate" required />
+        <select id="assetStatus">
+            <option value="Available">Available</option>
+            <option value="Damaged">Damaged</option>
+        </select>
+        <button type="submit">Save Asset</button>
+    </form>
+    <a href="dashboard.html">Back</a>
+</main>
+<script src="add-asset.js"></script>
+</body>
+</html>
