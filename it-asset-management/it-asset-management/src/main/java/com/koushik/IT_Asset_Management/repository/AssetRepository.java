@@ -1,3 +1,4 @@
+// src/main/java/com/koushik/IT_Asset_Management/repository/AssetRepository.java
 package com.koushik.IT_Asset_Management.repository;
 
 import com.koushik.IT_Asset_Management.model.Asset;

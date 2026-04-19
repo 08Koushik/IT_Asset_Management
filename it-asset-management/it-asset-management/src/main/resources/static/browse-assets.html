@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Browse Assets</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="navbar"><h2>Available Inventory</h2></header>
+<main class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="availableTable"></tbody>
+    </table>
+    <a href="user-dashboard.html" class="btn">Back</a>
+</main>
+<script>
+    fetch('/api/assets')
+        .then(res => res.json())
+        .then(assets => {
+            const tbody = document.getElementById("availableTable");
+            tbody.innerHTML = assets
+                .filter(a => a.status === "Available")
+                .map(a => `
+                    <tr>
+                        <td>${a.name}</td>
+                        <td>${a.category}</td>
+                        <td><button class="btn" onclick="sendRequest('${a.name}')">Request</button></td>
+                    </tr>`).join('');
+        });
+
+    function sendRequest(name) {
+        const user = localStorage.getItem("username");
+        fetch('/api/requests', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ assetName: name, requestedBy: user })
+        }).then(() => alert("Request sent!"));
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Requests</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="navbar"><h2>Pending Requests</h2></header>
+<main class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>User</th>
+            <th>Asset Name</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="reqBody"></tbody>
+    </table>
+    <a href="dashboard.html" class="btn">Back</a>
+</main>
+<script>
+    function load() {
+        fetch('/api/requests/pending')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("reqBody").innerHTML = data.map(r => `
+                    <tr>
+                        <td>${r.requestedBy}</td>
+                        <td>${r.assetName}</td>
+                        <td><button class="btn" onclick="approve(${r.id})">Approve</button></td>
+                    </tr>`).join('');
+            });
+    }
+    function approve(id) {
+        fetch(`/api/requests/approve/${id}`, { method: 'PUT' })
+            .then(() => { alert("Approved!"); load(); });
+    }
+    load();
+</script>
+</body>
+</html>
