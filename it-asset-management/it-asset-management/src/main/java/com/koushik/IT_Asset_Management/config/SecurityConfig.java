@@ -18,22 +18,22 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable()) // Crucial to prevent 403 on POST requests during development
                 .authorizeHttpRequests(auth -> auth
                         // Public access
-                        .requestMatchers("/index.html", "/register.html", "/*.js", "/*.css", "/api/public/**").permitAll()
+                        .requestMatchers("/", "/index.html", "/register.html", "/*.js", "/*.css", "/api/public/**").permitAll()
 
-                        // Admin specific pages - using hasAuthority to avoid ROLE_ prefix issues
-                        .requestMatchers("/dashboard.html", "/view-assets.html", "/add-asset.html", "/assign-asset.html", "/manage-requests.html").hasAuthority("ADMIN")
+                        // Admin routes - using hasRole("ADMIN") looks for "ROLE_ADMIN" in the DB
+                        .requestMatchers("/dashboard.html", "/view-assets.html", "/add-asset.html", "/assign-asset.html", "/manage-requests.html").hasRole("ADMIN")
 
-                        // User specific pages
-                        .requestMatchers("/user-dashboard.html", "/browse-assets.html", "/my-items.html").hasAuthority("USER")
+                        // User routes - using hasRole("USER") looks for "ROLE_USER" in the DB
+                        .requestMatchers("/user-dashboard.html", "/browse-assets.html", "/my-assets.html", "/view-available-assets.html").hasRole("USER")
 
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/index.html")
-                        .loginProcessingUrl("/perform_login")
+                        .loginProcessingUrl("/perform_login") // Matches the action in your index.html
                         .defaultSuccessUrl("/dashboard.html", true)
                         .permitAll()
                 )

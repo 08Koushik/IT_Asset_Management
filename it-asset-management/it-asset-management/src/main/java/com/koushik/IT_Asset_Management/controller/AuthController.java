@@ -25,7 +25,7 @@ public class AuthController {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        // Logic: If username is 'admin', assign ADMIN role, otherwise assign USER role
+        // Assigning roles with the standard ROLE_ prefix
         if ("admin".equalsIgnoreCase(user.getUsername())) {
             user.setRole("ROLE_ADMIN");
         } else {
