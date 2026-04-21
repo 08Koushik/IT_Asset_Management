@@ -6,28 +6,30 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header class="navbar">
-    <h2>Welcome to Your Dashboard</h2>
-</header>
+<nav class="navbar">
+    <div class="nav-logo">
+        <h2 class="nav-logo-text">AssetCore <span>User</span></h2>
+    </div>
+    <button class="btn" id="logoutBtn" style="background: var(--danger)">Logout</button>
+</nav>
 
-<main class="dashboard">
-    <div class="dashboard-cards">
+<main class="dashboard" style="padding: 2rem;">
+    <h3 style="font-family: 'Syne'; margin-bottom: 2rem;">Workspace Overview</h3>
+
+    <div class="cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
         <div class="card">
-            <h3>Available Assets</h3>
-            <p>View and request new tools.</p>
-            <a href="view-available-assets.html" class="btn">Browse</a>
+            <h4 style="color: var(--accent)">Available Assets</h4>
+            <p style="color: var(--muted); font-size: 0.9rem; margin: 10px 0;">Browse and request new hardware.</p>
+            <a href="view-available-assets.html" class="btn">View Catalog</a>
         </div>
 
         <div class="card">
-            <h3>My Assets</h3>
-            <p>Manage items assigned to you.</p>
+            <h4 style="color: var(--accent2)">My Inventory</h4>
+            <p style="color: var(--muted); font-size: 0.9rem; margin: 10px 0;">Manage your assigned items.</p>
             <a href="my-assets.html" class="btn">View My Items</a>
         </div>
     </div>
-
-    <div class="logout-btn">
-        <a href="index.html" class="btn">Logout</a>
-    </div>
 </main>
+<script src="script.js"></script>
 </body>
 </html>

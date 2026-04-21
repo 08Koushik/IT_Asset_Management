@@ -2,23 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard | AssetCore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<header class="navbar"><h2>Admin Dashboard</h2></header>
-<main class="dashboard">
-    <div class="cards">
-        <div class="card"><h4>Total Assets</h4><p id="totalAssets">0</p></div>
-        <div class="card"><h4>Available</h4><p id="availableAssets">0</p></div>
+<body class="reveal">
+<nav class="navbar">
+    <div class="nav-logo">
+        <div class="nav-logo-icon">⚙</div>
+        <span class="nav-logo-text">AssetCore <span style="color:var(--accent2)">Admin</span></span>
     </div>
-    <div class="buttons">
-        <a href="add-asset.html" class="btn">Add Asset</a>
-        <a href="view-assets.html" class="btn">View Assets</a>
-        <a href="assign-asset.html" class="btn">Assign Asset</a>
+    <button class="btn" id="logoutBtn" style="background: var(--danger)">Logout</button>
+</nav>
+
+<main style="padding: 2rem; max-width: 1200px; margin: 0 auto;">
+    <h3 style="font-family: 'Syne'; font-size: 1.8rem; margin-bottom: 2rem;">System Overview</h3>
+
+    <div class="stat-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 3rem;">
+        <div class="stat-card">
+            <div class="stat-label">Total Inventory</div>
+            <div class="stat-value" id="totalAssets" style="color: var(--accent);">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Currently Available</div>
+            <div class="stat-value" id="availableAssets" style="color: var(--success);">0</div>
+        </div>
     </div>
-    <div class="logout-section">
-        <button id="logoutBtn">Logout</button>
+
+    <div class="buttons" style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: flex-start;">
+        <a href="add-asset.html" class="btn">Add New Asset</a>
+        <a href="view-assets.html" class="btn">Inventory Audit</a>
+        <a href="assign-asset.html" class="btn">Manual Assignment</a>
+        <a href="manage-requests.html" class="btn" style="background: var(--accent2)">Approval Queue</a>
     </div>
 </main>
 <script src="script.js"></script>

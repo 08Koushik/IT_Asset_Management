@@ -22,7 +22,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Static resources and public pages — always open
                         .requestMatchers(
-                                "/", "/index.html", "/register.html",
+                                "/", "/welcome.html", "/index.html", "/register.html",
                                 "/**/*.js", "/**/*.css", "/**/*.png", "/**/*.ico",
                                 "/api/public/**"
                         ).permitAll()

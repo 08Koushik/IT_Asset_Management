@@ -42,4 +42,14 @@ public class RequestController {
         targetAsset.setAssignedTo(req.getRequestedBy());
         assetRepository.save(targetAsset);
     }
+    @PutMapping("/decline/{id}")
+    public void declineRequest(@PathVariable Long id) {
+        AssetRequest req = requestRepository.findById(id).orElseThrow();
+        req.setStatus("Declined");
+        requestRepository.save(req);
+    }
+    @GetMapping("/all")
+    public List<AssetRequest> getAllRequests() {
+        return requestRepository.findAll();
+    }
 }

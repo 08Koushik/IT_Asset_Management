@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Manage Requests</title>
+    <meta charset="UTF-8"><title>Manage Requests</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="navbar"><h2>Pending Requests</h2></header>
-<main class="container">
+<header class="navbar"><h2>Pending Asset Requests</h2></header>
+<main style="padding: 2rem; max-width: 1000px; margin: 0 auto;" class="reveal">
+    <h3 style="font-family: 'Syne'; margin-bottom: 1.5rem;">Pending Approval Queue</h3>
     <table>
         <thead>
         <tr>
-            <th>User</th>
-            <th>Asset Name</th>
-            <th>Action</th>
+            <th>Requesting User</th>
+            <th>Requested Asset</th>
+            <th style="text-align: right;">Management Actions</th>
         </tr>
         </thead>
-        <tbody id="reqBody"></tbody>
+        <tbody id="reqBody">
+        </tbody>
     </table>
-    <a href="dashboard.html" class="btn">Back</a>
+    <div style="margin-top: 2rem;">
+        <a href="dashboard.html" class="btn-ghost" style="text-decoration:none;">⬅ Back to System Overview</a>
+    </div>
 </main>
 <script>
-    function load() {
+    function loadPendingRequests() {
         fetch('/api/requests/pending')
             .then(res => res.json())
             .then(data => {
@@ -29,15 +32,23 @@
                     <tr>
                         <td>${r.requestedBy}</td>
                         <td>${r.assetName}</td>
-                        <td><button class="btn" onclick="approve(${r.id})">Approve</button></td>
+                        <td>
+                            <button class="btn" onclick="processRequest(${r.id}, 'approve')">Approve</button>
+                            <button class="btn delete" onclick="processRequest(${r.id}, 'decline')">Decline</button>
+                        </td>
                     </tr>`).join('');
             });
     }
-    function approve(id) {
-        fetch(`/api/requests/approve/${id}`, { method: 'PUT' })
-            .then(() => { alert("Approved!"); load(); });
+
+    function processRequest(id, action) {
+        const url = action === 'approve' ? `/api/requests/approve/${id}` : `/api/requests/decline/${id}`;
+        fetch(url, { method: 'PUT' })
+            .then(() => {
+                alert(`Request ${action}d!`);
+                loadPendingRequests();
+            });
     }
-    load();
+    loadPendingRequests();
 </script>
 </body>
 </html>
